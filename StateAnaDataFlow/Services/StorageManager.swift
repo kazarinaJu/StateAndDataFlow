@@ -16,14 +16,14 @@ final class StorageManager {
     private init() {}
     
     func save(user: User) {
-        // let user = fetchUser()
         guard let data = try? JSONEncoder().encode(user) else { return }
         userDefaults.set(data, forKey: key)
     }
     
-    func deleteUser(userSettings: UserSettings) {
-        userSettings.user.name = ""
+    func deleteUser(userSettings: UserSettings ) {
         userSettings.user.isRegistered = false
+        userSettings.user.name = ""
+        userDefaults.removeObject(forKey: key)
     }
     
     func fetchUser() -> User {

@@ -22,9 +22,17 @@ struct ContentView: View {
             
             Spacer()
             
-            ButtonView(timer: timer)
+            CustomButtonView(
+                text: timer.buttonTitle,
+                color: .red,
+                action: timer.startTimer)
             
             Spacer()
+            
+            CustomButtonView(text: "LogOut", color: .blue) {
+                StorageManager.shared.deleteUser(userSettings: userSettings)
+            }
+            .padding(.bottom, 20)
         }
     }
 }
@@ -36,22 +44,4 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-struct ButtonView: View {
-    @ObservedObject var timer: TimeCounter
-    
-    var body: some View {
-        Button(action: timer.startTimer) {
-            Text(timer.buttonTitle)
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-        }
-        .frame(width: 200, height: 60)
-        .background(.red)
-        .cornerRadius(20)
-        .overlay {
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(.black, lineWidth: 4)
-        }
-    }
-}
+
