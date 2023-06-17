@@ -8,22 +8,23 @@
 import SwiftUI
 
 struct RootView: View {
-    @StateObject private var user = UserSettings()
+    
+    @EnvironmentObject private var userSettings: UserSettings
     
     var body: some View {
         Group {
-            if user.isLoggedIn {
+            if userSettings.user.isRegistered {
                 ContentView()
             } else {
                 LoginView()
             }
         }
-        .environmentObject(user)
     }
 }
 
 struct RootView_Previews: PreviewProvider {
     static var previews: some View {
         RootView()
+            .environmentObject(UserSettings())
     }
 }
