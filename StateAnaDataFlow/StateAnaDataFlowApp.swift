@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct StateAnaDataFlowApp: App {
+    private let user = StorageManager.shared.fetchUser()
+
     var body: some Scene {
         WindowGroup {
             RootView()
+                .environmentObject(UserSettings(user: user))
         }
     }
 }
