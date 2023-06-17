@@ -7,11 +7,6 @@
 
 import Foundation
 
-struct User: Codable {
-    var name = ""
-    var isRegistered = false
-}
-
 final class UserSettings: ObservableObject {
     @Published var user = User()
     
